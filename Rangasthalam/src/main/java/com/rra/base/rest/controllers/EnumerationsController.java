@@ -1,7 +1,6 @@
 package com.rra.base.rest.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rra.base.enums.AvailableEnumerationsEnum;
-import com.rra.base.jpa.entity.node.Nation;
-import com.rra.base.jpa.repositories.neo4j.NationRepository;
+import com.rra.base.rest.dto.NationDto;
+import com.rra.base.rest.services.NationRepositoryService;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -21,17 +20,14 @@ import com.rra.base.jpa.repositories.neo4j.NationRepository;
 public class EnumerationsController {
 
 	@Autowired
-	private NationRepository nationRepository;
-	
+	private NationRepositoryService nationRepositoryService;
+
 	@GetMapping("/category/{x}")
 	@ResponseBody
-	public HashMap<String,String> get(@PathVariable("x") String urlParameter) {
-		HashMap<String,String> h = new HashMap<String,String>();
-		System.out.println("looking for = "+urlParameter);
-		Nation n= nationRepository.findByName(urlParameter);
-		h.put("currency", n.getCurrency());
-		h.put("countryCode", n.getCountrycode());
-		return h;
+	public NationDto get(@PathVariable("x") String urlParameter) {
+		System.out.println("looking for = " + urlParameter);
+		return nationRepositoryService.findByName(urlParameter);
+
 	}
 
 	@GetMapping("/categories")

@@ -3,6 +3,8 @@ package com.rra.base.enums;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public enum AvailableEnumerationsEnum {
@@ -52,7 +54,8 @@ public enum AvailableEnumerationsEnum {
 	
 	public static List<AvailableEnumerationsEnum> getAll() {
 		AvailableEnumerationsEnum types[] = AvailableEnumerationsEnum.values();
-		List<AvailableEnumerationsEnum> all = new ArrayList<AvailableEnumerationsEnum>(Arrays.stream(types).toList());
+		Stream<AvailableEnumerationsEnum> s = Arrays.stream(types);
+		List<AvailableEnumerationsEnum> all = s.collect(Collectors.toList());
 		all.remove(UNKNOWN);
 		return all;
 	}
