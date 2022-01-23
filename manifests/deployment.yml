@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: ravirajaaddaladatahub 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ravirajaaddaladatahub
+  template:
+    metadata:
+      labels:
+        app: ravirajaaddaladatahub 
+    spec:
+      containers:
+        - name: ravirajaaddaladatahub 
+          image: datahubregistry.azurecr.io/ravirajaaddaladatahub
+          ports:
+          - containerPort: 80
